@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Google Maps Point Marker</title>
+
+<style type="text/css">
+#map {
+  height: 600px;
+  width: 80%;
+}
+</style>
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+var marker = null;
+var lat = 35.729493379635535;
+var lng = 139.71086479574538;
+
+function init() {
+	//初期化
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 18, center: {lat: lat, lng: lng}
+	});
+
+	document.getElementById('lat').value = lat;
+	document.getElementById('lng').value = lng;
+
+	//初期マーカー
+	marker = new google.maps.Marker({
+		map: map, position: new google.maps.LatLng(lat, lng),
+	});
+
+	//クリックイベント
+	map.addListener('click', function(e) {
+		clickMap(e.latLng, map);
+	});
+}
+
+function clickMap(geo, map) {
+	lat = geo.lat();
+	lng = geo.lng();
+
+	//小数点以下6桁に丸める場合
+	//lat = Math.floor(lat * 1000000) / 1000000);
+	//lng = Math.floor(lng * 1000000) / 1000000);
+
+	document.getElementById('lat').value = lat;
+	document.getElementById('lng').value = lng;
+
+	//中心にスクロール
+	map.panTo(geo);
+
+	//マーカーの更新
+	marker.setMap(null);
+	marker = null;
+	marker = new google.maps.Marker({
+		map: map, position: geo 
+	});
+	
+}
+</script>
+
+<body onload="javascript:init();">
+
+<p>Google Maps Point Marker</p>
+
+<div id="map" style="margin-top: 10px; margin-bottom:15px;"></div>
+
+緯度：<input type="text" id="lat" name="lat" value="" size="20">　経度：<input type="text" id="lng" name="lng" value="" size="20">
+
+</body>
+</html>
