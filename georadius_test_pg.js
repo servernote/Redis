@@ -9,8 +9,8 @@ var client = new Client({
 client.connect();
 
 var query = "SELECT name, ST_X(geom::geometry) AS longitude, ST_Y(geom::geometry) AS latitude," +
-" ST_Distance('SRID=4326;POINT(139.554424 35.729719)', geom) AS distance" +
-" FROM ekipos WHERE ST_DWithin(geom, ST_GeographyFromText('SRID=4326;POINT(139.554424 35.729719)'), 5000.0)" +
+" ST_Distance('SRID=4326;POINT(139.394872 35.822019)', geom) AS distance" +
+" FROM ekipos WHERE ST_DWithin(geom, ST_GeographyFromText('SRID=4326;POINT(139.394872 35.822019)'), 10000.0)" +
 " ORDER BY distance LIMIT 20";
 
 var micro_fr = (Date.now() + performance.now()) * 1000;
