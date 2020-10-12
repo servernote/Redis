@@ -2,9 +2,9 @@ var performance = require('perf_hooks').performance;
 var redis = require('redis');
 var client = redis.createClient();
 
-var lat = 35.729719;
-var lng = 139.554424;
-var rad = 5000;
+var lat = 35.822019;
+var lng = 139.394872;
+var rad = 10000;
 var cnt = 20;
 
 var argArray = ['ekipos', lng, lat, rad, 'm', 'WITHDIST', 'ASC'];
